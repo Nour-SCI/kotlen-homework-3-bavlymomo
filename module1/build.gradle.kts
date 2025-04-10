@@ -1,21 +1,21 @@
+plugins {
+    id("org.jetbrains.kotlin.jvm") // Apply plugin directly by ID
+}
+
 group = rootProject.group
 version = rootProject.version
 
-plugins {
-    kotlin("jvm") // Ensure Kotlin plugin is applied
-}
-
 dependencies {
-    implementation(project(":module2")) // Existing dependency
-    testImplementation(libs.junit.jupiter.api) // Reference from libs.versions.toml
-    testRuntimeOnly(libs.junit.jupiter.engine) // Reference from libs.versions.toml
+    implementation(project(":module2")) // Use implementation scope
+
+    // Add test dependencies using version catalog
+    testImplementation(libs.junit.jupiter.api)
+    testImplementation(libs.junit.jupiter.params)
+    testRuntimeOnly(libs.junit.jupiter.engine)
+    testRuntimeOnly(libs.junit.platform.console)
 }
 
-
-// Add this test configuration block:
-tasks.test {
-    useJUnitPlatform() // Enable JUnit 5
-    testLogging {
-        events("passed", "skipped", "failed") // Show test results in logs
-    }
+// Configure JUnit Platform for tests in this module
+tasks.withType<Test>().configureEach {
+    useJUnitPlatform()
 }
