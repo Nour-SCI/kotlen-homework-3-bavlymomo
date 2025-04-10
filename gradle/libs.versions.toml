@@ -1,9 +1,15 @@
 [versions]
 kotlin = "1.7.21"
-buildconfig = "3.0.3"
+buildconfig = "3.1.0"  # Latest buildconfig version
+junit-jupiter = "5.9.0"
+junit-platform = "1.9.0"
 
-[libraries]
 
 [plugins]
-buildconfig = { id = "com.github.gmazzo.buildconfig", version.ref = "buildconfig" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+buildconfig = { id = "com.github.gmazzo.buildconfig", version.ref = "buildconfig" }  # <-- This now works
+
+[libraries]
+junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit-jupiter" }
+junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit-jupiter" }
+junit-platform-console = { module = "org.junit.platform:junit-platform-console", version.ref = "junit-platform" }
